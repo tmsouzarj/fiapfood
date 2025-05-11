@@ -1,0 +1,100 @@
+package br.com.fiapfood.mappers;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Component;
+
+import br.com.fiapfood.entities.db.UsuarioEntity;
+import br.com.fiapfood.entities.domain.UsuarioDomain;
+import br.com.fiapfood.entities.record.request.UsuarioRecordRequest;
+import br.com.fiapfood.entities.record.response.PaginacaoRecordResponse;
+import br.com.fiapfood.entities.record.response.UsuarioRecordPaginacaoResponse;
+import br.com.fiapfood.entities.record.response.UsuarioRecordResponse;
+
+@Component
+public abstract class UsuarioMapper {
+	
+	// record -> domain -> entity
+	
+	// 1 - record -> domain
+	public static UsuarioDomain toUsuarioDomain(UsuarioRecordRequest usuarioRecord) {
+		return new UsuarioDomain(null,
+							     usuarioRecord.nome(), 
+							     usuarioRecord.email(), 
+							     usuarioRecord.login(), 
+							     usuarioRecord.senha(), 
+							     LocalDateTime.now(),
+							     null,
+							     true,
+							     DadosEnderecoMapper.toDadosEndereco(usuarioRecord.dadosEndereco())
+							     /*usuarioRecord.acessos()*/);
+	}
+
+	// 2 - domain -> entity
+	
+	public static UsuarioEntity toUsuarioEntity(UsuarioDomain usuario) {
+		UsuarioEntity usuarioEntity = new UsuarioEntity(usuario.getId(),
+														usuario.getNome(), 
+														usuario.getEmail(), 
+														usuario.getLogin(), 
+														usuario.getSenha(),
+														usuario.getDataCriacao(),
+														usuario.getDataAtualizacao(),
+														usuario.getIsAtivo(),
+														null);
+		usuarioEntity.atualizarDadosEndereco(DadosEnderecoMapper.toDadosEnderecoEntity(usuario.getDadosEndereco()));
+		
+		return usuarioEntity;
+	}
+	
+	// entity -> domain -> record
+	
+	// 3 - entity -> domain
+	
+	public static UsuarioDomain toUsuarioDomain(UsuarioEntity usuario) {
+		return new UsuarioDomain(usuario.getId(),
+								 usuario.getNome(), 
+							     usuario.getEmail(), 
+							     usuario.getLogin(), 
+								 usuario.getSenha(),
+								 usuario.getDataCriacao(),
+								 usuario.getDataAtualizacao(),
+								 usuario.getIsAtivo(),
+							     DadosEnderecoMapper.toDadosEndereco(usuario.getDadosEndereco()));
+//							     usuario.getAcessos()
+//									    .stream()
+//									    .map(a -> a.getPerfilAcesso().getId())
+//									    .collect(Collectors.toList()));
+	}
+	
+	// 4 - domain -> record
+	
+	public static UsuarioRecordResponse toUsuarioRecord(UsuarioDomain usuario) {
+		return new UsuarioRecordResponse(usuario.getId(), 
+										 usuario.getNome(), 
+										 usuario.getEmail(), 
+										 usuario.getLogin(), 
+										 usuario.getIsAtivo(),
+										 DadosEnderecoMapper.toDadosEnderecoRecord(usuario.getDadosEndereco())
+										 /*usuario.getAcessos()*/);
+	}
+
+	public static UsuarioRecordPaginacaoResponse toUsuarioPaginacaoRecord(Page<UsuarioEntity> dados) {
+		List<UsuarioRecordResponse> usuarios = dados.toList()
+													.stream()
+													.map(u -> UsuarioMapper.toUsuarioDomain(u))
+													.map(u -> UsuarioMapper.toUsuarioRecord(u))
+													.collect(Collectors.toList());
+		
+		PaginacaoRecordResponse dadosPaginacao = new PaginacaoRecordResponse(dados.getNumber() + 1, dados.getTotalPages(), Long.valueOf(dados.getTotalElements()).intValue());
+		
+		return new UsuarioRecordPaginacaoResponse(usuarios, dadosPaginacao);
+	}
+
+	/*public static UsuarioSecurity toUsuarioSecurity(Usuario usuario) {
+		return new UsuarioSecurity(usuario);
+	}*/
+}
