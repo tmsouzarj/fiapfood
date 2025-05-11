@@ -23,7 +23,7 @@ public abstract class DadosEnderecoMapper {
 	}
 	
 	// 2 - domain -> entity
-	public static DadosEnderecoEntity toDadosEnderecoEntity(DadosEnderecoDomain dadosEndereco) {
+	public static DadosEnderecoEntity toDadosEndereco(DadosEnderecoDomain dadosEndereco) {
 		return new DadosEnderecoEntity(dadosEndereco.getId(),
 									   dadosEndereco.getCidade(),
 									   dadosEndereco.getCep(),

@@ -1,7 +1,5 @@
 package br.com.fiapfood.entities.record.request;
 
-import java.util.List;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,7 +10,7 @@ public record UsuarioRecordRequest(@Schema(description = "Nome do usuário", exa
 								   @Schema(description = "Login do usuário", example = "us000001") String login, 
 								   @Schema(description = "Senha do usuário", example = "1234") String senha, 
 								   @Schema(description = "Dados do endereço do usuário") DadosEnderecoRecord dadosEndereco,
-								   @Schema(description = "IDs dos perfis de acesso do usuário.", example = "[{1, 2}]") List<Integer> acessos) {
+								   @Schema(description = "IDs dos perfil de acesso do usuário.", example = "1") Integer perfilAcesso) {
 	public UsuarioRecordRequest(@NotBlank(message = "O campo nome precisa estar preenchido.")
 								@Size(min = 3, max = 150, message = "O campo nome precisa ter entre 3 e 150 caracteres.") 
 								String nome, 
@@ -32,15 +30,13 @@ public record UsuarioRecordRequest(@Schema(description = "Nome do usuário", exa
 								@NotNull(message = "Os dados do endereço precisam estar preenchidos.")
 								DadosEnderecoRecord dadosEndereco,
 								
-								@NotNull(message = "É necessário informar ao menos 1 acesso para o usuário.")
-								List<Integer> acessos) {
-		//validar(nome, email, login, senha, dadosEndereco, acessos);
-		
+								@NotNull(message = "É necessário informar o perfil de acesso para o usuário.")
+								Integer perfilAcesso) {
 		this.nome = nome;
 		this.email = email;
 		this.login = login;
 		this.senha = senha;
 		this.dadosEndereco = dadosEndereco;
-		this.acessos = acessos;
+		this.perfilAcesso = perfilAcesso;
 	}
 }

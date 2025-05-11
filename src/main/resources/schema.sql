@@ -1,3 +1,9 @@
+create table perfil (
+	id int not null auto_increment,
+	nome varchar(50) not null,
+	primary key(id)
+);
+
 create table usuario (
 	id int not null auto_increment,
 	nome varchar(150) not null,
@@ -7,7 +13,9 @@ create table usuario (
 	ativo tinyint(1) not null default 1,
 	data_criacao datetime not null,
 	data_atualizacao datetime null,
-	primary key(id)
+	id_perfil int not null,
+	primary key(id),
+	foreign key(id_perfil) references perfil(id)
 );
 
 create table endereco (
@@ -22,10 +30,4 @@ create table endereco (
 	cep varchar(100) not null,
 	primary key(id_usuario),
 	foreign key(id_usuario) references usuario(id)
-);
-
-create table perfil_acesso (
-	id int not null auto_increment,
-	nome varchar(50) not null,
-	primary key(id)
 );

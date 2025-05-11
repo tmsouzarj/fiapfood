@@ -19,5 +19,5 @@ public class UsuarioDomain {
 	private LocalDateTime dataAtualizacao;
 	private Boolean isAtivo;
 	private DadosEnderecoDomain dadosEndereco;
-	//private List<Integer> acessos;
+	private PerfilDomain perfilAcesso;
 }

@@ -7,5 +7,5 @@ public record UsuarioRecordResponse(Integer id,
 									String email, 
 									String login, 
 									Boolean ativo, 
-									DadosEnderecoRecord dadosEndereco
-									/*List<Integer> acessos*/) { }
+									DadosEnderecoRecord dadosEndereco,
+									PerfilRecordResponse perfilAcesso) { }

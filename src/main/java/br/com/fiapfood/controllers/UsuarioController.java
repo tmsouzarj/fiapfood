@@ -29,15 +29,10 @@ public class UsuarioController implements UsuarioDoc {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	//@Autowired
-	//private List<IRegraNegocio<UsuarioRecordRequest>> regrasDeNegocioUsuario;
-	
 	@Override
 	@PostMapping
 	public ResponseEntity<Void> cadastrar(UsuarioRecordRequest usuario) {
 		log.info("cadastrar():dados do usuário {}", usuario);
-		
-		// regrasDeNegocioUsuario.forEach(r -> r.validar(usuario));
 		
 		usuarioService.cadastrar(usuario);
 		
@@ -48,8 +43,6 @@ public class UsuarioController implements UsuarioDoc {
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> atualizar(Integer id, UsuarioRecordRequest usuario) {
 		log.info("atualizar():id {} - dados do usuário {}", id, usuario);
-
-		//regrasDeNegocioUsuario.forEach(r -> r.validar(usuario));
 	
 		usuarioService.atualizar(id, usuario);
 		

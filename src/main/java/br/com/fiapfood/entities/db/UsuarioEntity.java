@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
@@ -42,8 +44,9 @@ public class UsuarioEntity {
 	@PrimaryKeyJoinColumn(name = "id_usuario")
 	private DadosEnderecoEntity dadosEndereco;
 	
-	//@OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	//private List<PerfilAcessoUsuarioEntity> acessos;
+	@ManyToOne
+	@JoinColumn(name = "id_perfil")
+	private PerfilEntity perfil;
 	
 	public void inativar() {
 		this.isAtivo = false;
@@ -69,5 +72,9 @@ public class UsuarioEntity {
 	public void atualizarDadosEndereco(DadosEnderecoEntity dadosEndereco) {
 		this.dadosEndereco = dadosEndereco;
 		this.dadosEndereco.setUsuario(this);
+	}
+	
+	public void atualizarPerfil(PerfilEntity perfil) {
+		this.perfil = perfil;
 	}
 }

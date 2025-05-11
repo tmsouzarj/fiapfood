@@ -29,8 +29,8 @@ public abstract class UsuarioMapper {
 							     LocalDateTime.now(),
 							     null,
 							     true,
-							     DadosEnderecoMapper.toDadosEndereco(usuarioRecord.dadosEndereco())
-							     /*usuarioRecord.acessos()*/);
+							     DadosEnderecoMapper.toDadosEndereco(usuarioRecord.dadosEndereco()),
+							     PerfilAcessoMapper.toPerfil(usuarioRecord.perfilAcesso()));
 	}
 
 	// 2 - domain -> entity
@@ -44,8 +44,9 @@ public abstract class UsuarioMapper {
 														usuario.getDataCriacao(),
 														usuario.getDataAtualizacao(),
 														usuario.getIsAtivo(),
-														null);
-		usuarioEntity.atualizarDadosEndereco(DadosEnderecoMapper.toDadosEnderecoEntity(usuario.getDadosEndereco()));
+														null,
+														PerfilAcessoMapper.toPerfil(usuario.getPerfilAcesso()));
+		usuarioEntity.atualizarDadosEndereco(DadosEnderecoMapper.toDadosEndereco(usuario.getDadosEndereco()));
 		
 		return usuarioEntity;
 	}
@@ -63,11 +64,8 @@ public abstract class UsuarioMapper {
 								 usuario.getDataCriacao(),
 								 usuario.getDataAtualizacao(),
 								 usuario.getIsAtivo(),
-							     DadosEnderecoMapper.toDadosEndereco(usuario.getDadosEndereco()));
-//							     usuario.getAcessos()
-//									    .stream()
-//									    .map(a -> a.getPerfilAcesso().getId())
-//									    .collect(Collectors.toList()));
+							     DadosEnderecoMapper.toDadosEndereco(usuario.getDadosEndereco()),
+							     PerfilAcessoMapper.toPerfil(usuario.getPerfil()));
 	}
 	
 	// 4 - domain -> record
@@ -78,8 +76,8 @@ public abstract class UsuarioMapper {
 										 usuario.getEmail(), 
 										 usuario.getLogin(), 
 										 usuario.getIsAtivo(),
-										 DadosEnderecoMapper.toDadosEnderecoRecord(usuario.getDadosEndereco())
-										 /*usuario.getAcessos()*/);
+										 DadosEnderecoMapper.toDadosEnderecoRecord(usuario.getDadosEndereco()),
+										 PerfilAcessoMapper.toPerfilRecord(usuario.getPerfilAcesso()));
 	}
 
 	public static UsuarioRecordPaginacaoResponse toUsuarioPaginacaoRecord(Page<UsuarioEntity> dados) {
@@ -93,8 +91,4 @@ public abstract class UsuarioMapper {
 		
 		return new UsuarioRecordPaginacaoResponse(usuarios, dadosPaginacao);
 	}
-
-	/*public static UsuarioSecurity toUsuarioSecurity(Usuario usuario) {
-		return new UsuarioSecurity(usuario);
-	}*/
 }

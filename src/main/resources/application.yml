@@ -3,7 +3,7 @@ spring:
     name: fiapfood
   datasource:
     driverClassName: org.h2.Driver
-    url: jdbc:h2:mem:restaurantetudibaum;DB_CLOSE_DELAY=-1;AUTO_RECONNECT=TRUE;MODE=MySQL;
+    url: jdbc:h2:mem:fiapfood;DB_CLOSE_DELAY=-1;AUTO_RECONNECT=TRUE;MODE=MySQL;
     username: sa
     password: 
   jpa:
