@@ -16,21 +16,20 @@ import br.com.fiapfood.entities.record.response.UsuarioRecordResponse;
 
 @Component
 public abstract class UsuarioMapper {
-	
+
 	// record -> domain -> entity
 	
 	// 1 - record -> domain
-	public static UsuarioDomain toUsuarioDomain(UsuarioRecordRequest usuarioRecord) {
+	public static UsuarioDomain toUsuarioDomain(UsuarioRecordRequest usuario) {
 		return new UsuarioDomain(null,
-							     usuarioRecord.nome(), 
-							     usuarioRecord.email(), 
-							     usuarioRecord.login(), 
-							     usuarioRecord.senha(), 
+							     usuario.nome(), 
+							     usuario.email(), 
 							     LocalDateTime.now(),
 							     null,
 							     true,
-							     DadosEnderecoMapper.toDadosEndereco(usuarioRecord.dadosEndereco()),
-							     PerfilAcessoMapper.toPerfil(usuarioRecord.perfilAcesso()));
+							     DadosEnderecoMapper.toDadosEndereco(usuario.dadosEndereco()),
+							     PerfilAcessoMapper.toPerfil(usuario.perfil()),
+							     LoginMapper.toLogin(usuario.dadosLogin()));
 	}
 
 	// 2 - domain -> entity
@@ -39,15 +38,16 @@ public abstract class UsuarioMapper {
 		UsuarioEntity usuarioEntity = new UsuarioEntity(usuario.getId(),
 														usuario.getNome(), 
 														usuario.getEmail(), 
-														usuario.getLogin(), 
-														usuario.getSenha(),
 														usuario.getDataCriacao(),
 														usuario.getDataAtualizacao(),
 														usuario.getIsAtivo(),
 														null,
-														PerfilAcessoMapper.toPerfil(usuario.getPerfilAcesso()));
-		usuarioEntity.atualizarDadosEndereco(DadosEnderecoMapper.toDadosEndereco(usuario.getDadosEndereco()));
+														PerfilAcessoMapper.toPerfil(usuario.getPerfil()),
+														null);
 		
+		usuarioEntity.atualizarDadosEndereco(DadosEnderecoMapper.toDadosEndereco(usuario.getDadosEndereco()));
+		usuarioEntity.atualizarDadosLogin(LoginMapper.toLogin(usuario.getDadosLogin()));
+
 		return usuarioEntity;
 	}
 	
@@ -59,13 +59,12 @@ public abstract class UsuarioMapper {
 		return new UsuarioDomain(usuario.getId(),
 								 usuario.getNome(), 
 							     usuario.getEmail(), 
-							     usuario.getLogin(), 
-								 usuario.getSenha(),
 								 usuario.getDataCriacao(),
 								 usuario.getDataAtualizacao(),
 								 usuario.getIsAtivo(),
 							     DadosEnderecoMapper.toDadosEndereco(usuario.getDadosEndereco()),
-							     PerfilAcessoMapper.toPerfil(usuario.getPerfil()));
+							     PerfilAcessoMapper.toPerfil(usuario.getPerfil()),
+							     LoginMapper.toLogin(usuario.getDadosLogin()));
 	}
 	
 	// 4 - domain -> record
@@ -74,10 +73,10 @@ public abstract class UsuarioMapper {
 		return new UsuarioRecordResponse(usuario.getId(), 
 										 usuario.getNome(), 
 										 usuario.getEmail(), 
-										 usuario.getLogin(), 
+										 usuario.getDadosLogin().getMatricula(),
 										 usuario.getIsAtivo(),
 										 DadosEnderecoMapper.toDadosEnderecoRecord(usuario.getDadosEndereco()),
-										 PerfilAcessoMapper.toPerfilRecord(usuario.getPerfilAcesso()));
+										 PerfilAcessoMapper.toPerfilRecord(usuario.getPerfil()));
 	}
 
 	public static UsuarioRecordPaginacaoResponse toUsuarioPaginacaoRecord(Page<UsuarioEntity> dados) {

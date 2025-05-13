@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiapfood.controllers.docs.LoginDoc;
 import br.com.fiapfood.entities.record.request.LoginRecordRequest;
-import br.com.fiapfood.entities.record.response.LoginRecordResponse;
+import br.com.fiapfood.entities.record.response.TokenRecordResponse;
 import br.com.fiapfood.services.LoginService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,9 +22,9 @@ public class LoginController implements LoginDoc {
 	
 	@Override
 	@PostMapping
-	public ResponseEntity<LoginRecordResponse> realizaLogin(LoginRecordRequest dados) {		
+	public ResponseEntity<TokenRecordResponse> realizaLogin(LoginRecordRequest dados) {		
 		log.info("realizaLogin():dados do login {}", dados);
 
-		return ResponseEntity.ok().body(new LoginRecordResponse(loginService.gerarTokenAcesso(dados)));		
+		return ResponseEntity.ok().body(new TokenRecordResponse(loginService.gerarTokenAcesso(dados)));		
 	}
 }

@@ -5,7 +5,7 @@ import br.com.fiapfood.entities.record.request.DadosEnderecoRecord;
 public record UsuarioRecordResponse(Integer id, 
 									String nome, 
 									String email, 
-									String login, 
+									String matricula,
 									Boolean ativo, 
 									DadosEnderecoRecord dadosEndereco,
 									PerfilRecordResponse perfilAcesso) { }

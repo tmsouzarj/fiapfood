@@ -23,11 +23,11 @@ public class UsuarioRepository {
 	private final Integer QUANTIDADE_REGISTROS = 5;
 	
 	public UsuarioDomain recuperaDadosUsuarioPorLoginSenha(String usuario, String senha) {
-		return getUsuarioDomain(usuarioRepository.findUsuarioAtivoPorLoginSenha(usuario, senha));
+		return null;//return getUsuarioDomain(usuarioRepository.findUsuarioAtivoPorLoginSenha(usuario, senha));
 	}
 
 	public Optional<UsuarioEntity> recuperaDadosUsuarioPorLogin(String login) {
-		return usuarioRepository.findByLoginAndIsAtivoTrue(login);
+		return null;//return usuarioRepository.findByLoginAndIsAtivoTrue(login);
 	}
 
 	public UsuarioDomain recuperaDadosUsuarioPorId(Integer id) {

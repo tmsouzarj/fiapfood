@@ -8,8 +8,6 @@ create table usuario (
 	id int not null auto_increment,
 	nome varchar(150) not null,
 	email varchar(70) not null,
-	login varchar(8) not null,
-	senha varchar(10) not null,
 	ativo tinyint(1) not null default 1,
 	data_criacao datetime not null,
 	data_atualizacao datetime null,
@@ -28,6 +26,14 @@ create table endereco (
 	complemento varchar(150) null,
 	sem_numero tinyint(1) not null default 1,
 	cep varchar(100) not null,
+	primary key(id_usuario),
+	foreign key(id_usuario) references usuario(id)
+);
+
+create table login (
+	id_usuario int not null,
+	matricula varchar(6) not null,
+	senha varchar(10) not null,
 	primary key(id_usuario),
 	foreign key(id_usuario) references usuario(id)
 );

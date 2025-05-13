@@ -16,9 +16,9 @@ public class LoginService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	public String gerarTokenAcesso(LoginRecordRequest dados) /* throws InvalidKeyException, UnsupportedEncodingException */ {
+	public String gerarTokenAcesso(LoginRecordRequest dados)  {
 		try {
-			usuarioRepository.recuperaDadosUsuarioPorLoginSenha(dados.login(), dados.senha());
+			usuarioRepository.recuperaDadosUsuarioPorLoginSenha(dados.matricula(), dados.senha());
 			
 			return "Acesso liberado";
 		} catch(UsuarioNaoEncontradoException e) {

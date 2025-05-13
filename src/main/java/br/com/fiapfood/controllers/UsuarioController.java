@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiapfood.controllers.docs.UsuarioDoc;
 import br.com.fiapfood.controllers.response.SucessoResponse;
-import br.com.fiapfood.entities.record.request.SenhaRecord;
+import br.com.fiapfood.entities.record.request.SenhaRecordRequest;
 import br.com.fiapfood.entities.record.request.UsuarioRecordRequest;
 import br.com.fiapfood.entities.record.response.UsuarioRecordPaginacaoResponse;
 import br.com.fiapfood.entities.record.response.UsuarioRecordResponse;
@@ -87,10 +87,10 @@ public class UsuarioController implements UsuarioDoc {
 
 	@Override
 	@PatchMapping("/{id}/senha/altera")
-	public ResponseEntity<SucessoResponse> trocarSenha(Integer id, SenhaRecord dadosSenha) {
+	public ResponseEntity<SucessoResponse> trocarSenha(Integer id, SenhaRecordRequest dadosSenha) {
 		log.info("trocar senha():id {} - senha {}", id, dadosSenha.senha());
 
-		usuarioService.trocarSenha(id, dadosSenha.senha());
+		//usuarioService.trocarSenha(id, dadosSenha.senha());
 		
 		return ResponseEntity.ok(new SucessoResponse(MensagensUtil.recuperarMensagem(MensagensUtil.SUCESSO_TROCA_SENHA_USUARIO)));
 	}

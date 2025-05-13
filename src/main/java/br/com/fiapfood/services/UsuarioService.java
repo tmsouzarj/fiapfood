@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.fiapfood.entities.db.DadosEnderecoEntity;
+import br.com.fiapfood.entities.db.LoginEntity;
 import br.com.fiapfood.entities.db.PerfilEntity;
 import br.com.fiapfood.entities.db.UsuarioEntity;
 import br.com.fiapfood.entities.domain.UsuarioDomain;
 import br.com.fiapfood.entities.record.request.UsuarioRecordRequest;
 import br.com.fiapfood.entities.record.response.UsuarioRecordPaginacaoResponse;
 import br.com.fiapfood.entities.record.response.UsuarioRecordResponse;
+import br.com.fiapfood.mappers.LoginMapper;
 import br.com.fiapfood.mappers.UsuarioMapper;
 import br.com.fiapfood.repositories.impl.DadosEnderecoRepository;
 import br.com.fiapfood.repositories.impl.PerfilRepository;
@@ -75,18 +77,29 @@ public class UsuarioService {
 		usuarioRepository.salvar(usuario);
 	}
 	
-	public void trocarSenha(Integer id, String senha) {
-		UsuarioEntity usuario = usuarioRepository.recuperaDadosUsuarioAtivoPorId(id);
-		
-		usuario.trocarSenha(senha);
-
-		salvar(usuario);
-	}
+	/*
+	 * public void trocarSenha(Integer id, String senha) { UsuarioEntity usuario =
+	 * usuarioRepository.recuperaDadosUsuarioAtivoPorId(id);
+	 * 
+	 * usuario.trocarSenha(senha);
+	 * 
+	 * salvar(usuario); }
+	 */
 		
 	private void setaDadosAtualizacao(UsuarioRecordRequest usuarioRecord, UsuarioEntity usuario) {
 		usuario.atualizarDadosUsuario(usuarioRecord.nome(), usuarioRecord.email());
+		trataDadosLogin(usuarioRecord, usuario);
 		trataDadosEndereco(usuarioRecord, usuario);
 		trataDadosPerfil(usuarioRecord, usuario);
+	}
+
+	private void trataDadosLogin(UsuarioRecordRequest usuarioRecord, UsuarioEntity usuario) {
+		if(!usuarioRecord.dadosLogin().matricula().equals(usuario.getDadosLogin().getMatricula())) {
+			LoginEntity dadosLogin = usuario.getDadosLogin();
+			
+			dadosLogin.atualizarDados(usuarioRecord.dadosLogin().matricula(), usuarioRecord.dadosLogin().senha());
+			usuario.atualizarDadosLogin(dadosLogin);
+		}
 	}
 
 	private void trataDadosEndereco(UsuarioRecordRequest usuarioRecord, UsuarioEntity usuario) {
@@ -112,8 +125,8 @@ public class UsuarioService {
 	}
 	
 	private void trataDadosPerfil(UsuarioRecordRequest usuarioRecord, UsuarioEntity usuario) {
-		if(!usuarioRecord.perfilAcesso().equals(usuario.getPerfil().getId())) {
-			PerfilEntity perfil = perfilRepository.buscarPorId(usuarioRecord.perfilAcesso());
+		if(!usuarioRecord.perfil().equals(usuario.getPerfil().getId())) {
+			PerfilEntity perfil = perfilRepository.buscarPorId(usuarioRecord.perfil());
 			
 			usuario.atualizarPerfil(perfil);
 		}

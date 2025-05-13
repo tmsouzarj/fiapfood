@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.fiapfood.entities.record.request.LoginRecordRequest;
-import br.com.fiapfood.entities.record.response.LoginRecordResponse;
+import br.com.fiapfood.entities.record.response.TokenRecordResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -19,8 +19,8 @@ public interface LoginDoc {
 	@Operation(summary = "Realização a autenticação do usuário utilizando o seu usuário e a sua senha.")
 	@ApiResponses(value = {
 		@ApiResponse(responseCode = "200", description = "Token de acesso gerado com sucesso.", 
-					content = { @Content(mediaType = "application/json", schema = @Schema(implementation = LoginRecordResponse.class)) }),
+					content = { @Content(mediaType = "application/json", schema = @Schema(implementation = TokenRecordResponse.class)) }),
 		@ApiResponse(responseCode = "400", description = "Falha ao realizar a geração do token de acesso.", content = @Content)
 	})	
-	ResponseEntity<LoginRecordResponse> realizaLogin(@RequestBody @Valid LoginRecordRequest dados)/* throws TokenInvalidoException */;
+	ResponseEntity<TokenRecordResponse> realizaLogin(@RequestBody @Valid LoginRecordRequest dados)/* throws TokenInvalidoException */;
 }

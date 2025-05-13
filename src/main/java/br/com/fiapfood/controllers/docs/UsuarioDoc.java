@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.fiapfood.controllers.response.ErroResponse;
 import br.com.fiapfood.controllers.response.SucessoResponse;
-import br.com.fiapfood.entities.record.request.SenhaRecord;
+import br.com.fiapfood.entities.record.request.SenhaRecordRequest;
 import br.com.fiapfood.entities.record.request.UsuarioRecordRequest;
 import br.com.fiapfood.entities.record.response.UsuarioRecordPaginacaoResponse;
 import br.com.fiapfood.entities.record.response.UsuarioRecordResponse;
@@ -155,5 +155,5 @@ public interface UsuarioDoc {
 						    				  	  + "    \"mensagem\": \"Ocorreu um erro ao realizar a troca da senha do usuário.\"\r\n"
 						    				  	  + "}"))})
 	})
-	ResponseEntity<SucessoResponse> trocarSenha(@PathVariable @Valid @NotNull Integer id, @RequestBody @NotNull SenhaRecord dadosSenha);
+	ResponseEntity<SucessoResponse> trocarSenha(@PathVariable @Valid @NotNull Integer id, @RequestBody @NotNull SenhaRecordRequest dadosSenha);
 }
