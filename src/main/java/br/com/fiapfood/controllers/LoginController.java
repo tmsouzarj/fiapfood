@@ -32,7 +32,7 @@ public class LoginController implements LoginDoc {
 	}
 	
 	@Override
-	@PatchMapping("/{id}/senha/altera")
+	@PatchMapping("/{id}/senha")
 	public ResponseEntity<SucessoResponse> trocarSenha(Integer id, SenhaRecordRequest dados) {
 		log.info("trocar senha():id {} - senha {}", id, dados.senha());
 

@@ -14,14 +14,7 @@ public record UsuarioRecordRequest(@Schema(description = "Nome do usuário", exa
 								   @NotBlank(message = "O campo email precisa estar preenchido.")
 							       @Size(min = 3, max = 70, message = "O campo email precisa ter entre 3 e 70 caracteres.") 
 								   String email, 
-	
-							       //@NotNull(message = "Os dados do endereço precisam estar preenchidos.")
-								   //@Schema(description = "Dados do endereço do usuário") DadosEnderecoRecord dadosEndereco,
-								   
+									   
 								   @NotNull(message = "É necessário informar o perfil de acesso para o usuário.")
 								   @Schema(description = "IDs dos perfil de acesso do usuário.", example = "1") 
-								   Integer perfil
-								   
-								   //@NotNull(message = "Dados de acesso do usuário.")
-								   //@Schema(description = "Dados do login do usuário.", example = "1") LoginRecordRequest dadosLogin
-								   ) { }
+								   Integer perfil) { }

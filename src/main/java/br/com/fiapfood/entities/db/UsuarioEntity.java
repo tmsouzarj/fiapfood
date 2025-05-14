@@ -28,8 +28,6 @@ public class UsuarioEntity {
 	private Integer id;
 	private String nome;
 	private String email;
-	//private String login;
-	//private String senha;
 	
 	@Column(name = "data_criacao", nullable = false)
 	private LocalDateTime dataCriacao;

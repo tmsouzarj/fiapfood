@@ -40,7 +40,7 @@ public interface UsuarioDoc {
 						    				  	  + "    \"mensagem\": \"Ocorreu um erro ao realizar o cadastro do usuário.\"\r\n"
 						    				  	  + "}"))})
 	})
-	ResponseEntity<Void> cadastrar(@Valid @RequestBody UsuarioRecordRequest usuario);
+	ResponseEntity<Void> cadastrar(@Valid @RequestBody @NotNull UsuarioRecordRequest usuario);
 	
 	@Operation(summary = "Realiza a atualização do perfil de acesso do usuário no sistema.")
 	@ApiResponses(value = {
@@ -53,7 +53,7 @@ public interface UsuarioDoc {
 						    				  	  + "    \"mensagem\": \"Ocorreu um erro ao realizar a atualização dos dados do usuário.\"\r\n"
 						    				  	  + "}"))})
 	})
-	ResponseEntity<Void> atualizarPerfil(@Valid @PathVariable @NotNull Integer id, @RequestBody PerfilRecordRequest dadosPerfil);
+	ResponseEntity<Void> atualizarPerfil(@Valid @PathVariable @NotNull Integer id, @RequestBody @NotNull PerfilRecordRequest dadosPerfil);
 	
 	
 	@Operation(summary = "Realiza a atualização dos dados de login do usuário no sistema.")
@@ -67,7 +67,7 @@ public interface UsuarioDoc {
 						    				  	  + "    \"mensagem\": \"Ocorreu um erro ao realizar a atualização dos dados do usuário.\"\r\n"
 						    				  	  + "}"))})
 	})
-	ResponseEntity<Void> atualizarLogin(@Valid @PathVariable @NotNull Integer id, @RequestBody LoginRecordRequest dadosLogin);
+	ResponseEntity<Void> atualizarLogin(@Valid @PathVariable @NotNull Integer id, @RequestBody @NotNull LoginRecordRequest dadosLogin);
 	
 	@Operation(summary = "Realiza a atualização dos dados do endereço do usuário no sistema.")
 	@ApiResponses(value = {
@@ -80,7 +80,7 @@ public interface UsuarioDoc {
 						    				  	  + "    \"mensagem\": \"Ocorreu um erro ao realizar a atualização dos dados do usuário.\"\r\n"
 						    				  	  + "}"))})
 	})
-	ResponseEntity<Void> atualizarEndereco(@Valid @PathVariable @NotNull Integer id, @RequestBody EnderecoRecordRequest dadosEndereco);
+	ResponseEntity<Void> atualizarEndereco(@Valid @PathVariable @NotNull Integer id, @RequestBody @NotNull EnderecoRecordRequest dadosEndereco);
 	
 	@Operation(summary = "Realiza a atualização dos dados do endereço do usuário no sistema.")
 	@ApiResponses(value = {
@@ -93,7 +93,7 @@ public interface UsuarioDoc {
 						    				  	  + "    \"mensagem\": \"Ocorreu um erro ao realizar a atualização dos dados do usuário.\"\r\n"
 						    				  	  + "}"))})
 	})
-	ResponseEntity<Void> atualizarNome(@Valid @PathVariable @NotNull Integer id, @RequestBody NomeRecordRequest dados);
+	ResponseEntity<Void> atualizarNome(@Valid @PathVariable @NotNull Integer id, @RequestBody @NotNull NomeRecordRequest dados);
 	
 	@Operation(summary = "Realiza a atualização dos dados do endereço do usuário no sistema.")
 	@ApiResponses(value = {
@@ -106,7 +106,7 @@ public interface UsuarioDoc {
 						    				  	  + "    \"mensagem\": \"Ocorreu um erro ao realizar a atualização dos dados do usuário.\"\r\n"
 						    				  	  + "}"))})
 	})
-	ResponseEntity<Void> atualizarEmail(@Valid @PathVariable @NotNull Integer id, @RequestBody EmailRecordRequest dados);
+	ResponseEntity<Void> atualizarEmail(@Valid @PathVariable @NotNull Integer id, @RequestBody @NotNull EmailRecordRequest dados);
 	
 	@Operation(summary = "Realiza a inativação do usuário.")
 	@ApiResponses(value = {

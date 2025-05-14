@@ -8,7 +8,6 @@ import br.com.fiapfood.controllers.response.ErroResponse;
 import br.com.fiapfood.controllers.response.SucessoResponse;
 import br.com.fiapfood.entities.record.request.LoginRecordRequest;
 import br.com.fiapfood.entities.record.request.SenhaRecordRequest;
-import br.com.fiapfood.entities.record.response.TokenRecordResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
@@ -25,10 +24,10 @@ public interface LoginDoc {
 	@Operation(summary = "Realização a autenticação do usuário utilizando o seu usuário e a sua senha.")
 	@ApiResponses(value = {
 		@ApiResponse(responseCode = "200", description = "Token de acesso gerado com sucesso.", 
-					content = { @Content(mediaType = "application/json", schema = @Schema(implementation = TokenRecordResponse.class)) }),
+					content = { @Content(mediaType = "application/json", schema = @Schema(implementation = SucessoResponse.class)) }),
 		@ApiResponse(responseCode = "400", description = "Falha ao realizar a geração do token de acesso.", content = @Content)
 	})	
-	ResponseEntity<SucessoResponse> validar(@RequestBody @Valid LoginRecordRequest dados);
+	ResponseEntity<SucessoResponse> validar(@RequestBody @Valid @NotNull LoginRecordRequest dados);
 
 	@Operation(summary = "Realiza a alteração da senha do usuário.")
 	@ApiResponses(value = {
