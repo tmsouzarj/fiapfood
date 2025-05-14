@@ -13,7 +13,6 @@ import br.com.fiapfood.entities.domain.UsuarioDomain;
 import br.com.fiapfood.entities.record.request.UsuarioRecordRequest;
 import br.com.fiapfood.entities.record.response.UsuarioRecordPaginacaoResponse;
 import br.com.fiapfood.entities.record.response.UsuarioRecordResponse;
-import br.com.fiapfood.mappers.LoginMapper;
 import br.com.fiapfood.mappers.UsuarioMapper;
 import br.com.fiapfood.repositories.impl.DadosEnderecoRepository;
 import br.com.fiapfood.repositories.impl.PerfilRepository;
@@ -32,15 +31,18 @@ public class UsuarioService {
 	private PerfilRepository perfilRepository;
 	
 	public UsuarioRecordResponse buscarPorId(Integer id) {
-		return UsuarioMapper.toUsuarioRecord(usuarioRepository.recuperaDadosUsuarioPorId(id));
+		UsuarioEntity usuarioEntity = usuarioRepository.recuperaDadosUsuarioPorId(id);
+		UsuarioDomain usuarioDomain = UsuarioMapper.toUsuario(usuarioEntity);
+		
+		return UsuarioMapper.toUsuarioRecord(usuarioDomain);
 	}
 	
 	public UsuarioRecordPaginacaoResponse buscarUsuarios(final Integer pagina) {
-		return UsuarioMapper.toUsuarioPaginacaoRecord(usuarioRepository.recuperaDadosUsuarios(pagina));
+		return UsuarioMapper.toUsuario(usuarioRepository.recuperaDadosUsuarios(pagina));
 	}
 	
 	public void cadastrar(UsuarioRecordRequest usuario) {
-		salvar(UsuarioMapper.toUsuarioDomain(usuario));
+		salvar(UsuarioMapper.toUsuario(usuario));
 	}
 	
 	public void atualizar(Integer id, UsuarioRecordRequest usuarioRecord) {
@@ -68,7 +70,7 @@ public class UsuarioService {
 	}
 	
 	public void salvar(UsuarioDomain usuario) {
-		UsuarioEntity usuarioEntity = UsuarioMapper.toUsuarioEntity(usuario);
+		UsuarioEntity usuarioEntity = UsuarioMapper.toUsuario(usuario);
 		
 		usuarioRepository.salvar(usuarioEntity);
 	}
@@ -76,15 +78,6 @@ public class UsuarioService {
 	public void salvar(UsuarioEntity usuario) {
 		usuarioRepository.salvar(usuario);
 	}
-	
-	/*
-	 * public void trocarSenha(Integer id, String senha) { UsuarioEntity usuario =
-	 * usuarioRepository.recuperaDadosUsuarioAtivoPorId(id);
-	 * 
-	 * usuario.trocarSenha(senha);
-	 * 
-	 * salvar(usuario); }
-	 */
 		
 	private void setaDadosAtualizacao(UsuarioRecordRequest usuarioRecord, UsuarioEntity usuario) {
 		usuario.atualizarDadosUsuario(usuarioRecord.nome(), usuarioRecord.email());

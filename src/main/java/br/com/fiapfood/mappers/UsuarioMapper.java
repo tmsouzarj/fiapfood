@@ -20,7 +20,7 @@ public abstract class UsuarioMapper {
 	// record -> domain -> entity
 	
 	// 1 - record -> domain
-	public static UsuarioDomain toUsuarioDomain(UsuarioRecordRequest usuario) {
+	public static UsuarioDomain toUsuario(UsuarioRecordRequest usuario) {
 		return new UsuarioDomain(null,
 							     usuario.nome(), 
 							     usuario.email(), 
@@ -34,7 +34,7 @@ public abstract class UsuarioMapper {
 
 	// 2 - domain -> entity
 	
-	public static UsuarioEntity toUsuarioEntity(UsuarioDomain usuario) {
+	public static UsuarioEntity toUsuario(UsuarioDomain usuario) {
 		UsuarioEntity usuarioEntity = new UsuarioEntity(usuario.getId(),
 														usuario.getNome(), 
 														usuario.getEmail(), 
@@ -55,7 +55,7 @@ public abstract class UsuarioMapper {
 	
 	// 3 - entity -> domain
 	
-	public static UsuarioDomain toUsuarioDomain(UsuarioEntity usuario) {
+	public static UsuarioDomain toUsuario(UsuarioEntity usuario) {
 		return new UsuarioDomain(usuario.getId(),
 								 usuario.getNome(), 
 							     usuario.getEmail(), 
@@ -79,10 +79,10 @@ public abstract class UsuarioMapper {
 										 PerfilAcessoMapper.toPerfilRecord(usuario.getPerfil()));
 	}
 
-	public static UsuarioRecordPaginacaoResponse toUsuarioPaginacaoRecord(Page<UsuarioEntity> dados) {
+	public static UsuarioRecordPaginacaoResponse toUsuario(Page<UsuarioEntity> dados) {
 		List<UsuarioRecordResponse> usuarios = dados.toList()
 													.stream()
-													.map(u -> UsuarioMapper.toUsuarioDomain(u))
+													.map(u -> UsuarioMapper.toUsuario(u))
 													.map(u -> UsuarioMapper.toUsuarioRecord(u))
 													.collect(Collectors.toList());
 		

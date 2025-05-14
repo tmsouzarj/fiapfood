@@ -8,8 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import br.com.fiapfood.entities.db.UsuarioEntity;
-import br.com.fiapfood.entities.domain.UsuarioDomain;
-import br.com.fiapfood.mappers.UsuarioMapper;
 import br.com.fiapfood.repositories.exceptions.UsuarioNaoEncontradoException;
 import br.com.fiapfood.repositories.interfaces.IUsuarioRepository;
 import br.com.fiapfood.utils.MensagensUtil;
@@ -22,16 +20,8 @@ public class UsuarioRepository {
 		
 	private final Integer QUANTIDADE_REGISTROS = 5;
 	
-	public UsuarioDomain recuperaDadosUsuarioPorLoginSenha(String usuario, String senha) {
-		return null;//return getUsuarioDomain(usuarioRepository.findUsuarioAtivoPorLoginSenha(usuario, senha));
-	}
-
-	public Optional<UsuarioEntity> recuperaDadosUsuarioPorLogin(String login) {
-		return null;//return usuarioRepository.findByLoginAndIsAtivoTrue(login);
-	}
-
-	public UsuarioDomain recuperaDadosUsuarioPorId(Integer id) {
-		return getUsuarioDomain(usuarioRepository.findById(id));
+	public UsuarioEntity recuperaDadosUsuarioPorId(Integer id) {
+		return getUsuarioEntity(usuarioRepository.findById(id));
 	}
 
 	public UsuarioEntity recuperaDadosUsuarioInativoPorId(Integer id) {
@@ -54,14 +44,6 @@ public class UsuarioRepository {
 	
 	public void salvar(UsuarioEntity usuario) {
 		usuarioRepository.save(usuario);	
-	}
-	
-	protected UsuarioDomain getUsuarioDomain(Optional<UsuarioEntity> dadosUsuario) {
-		if(dadosUsuario.isPresent()) {		
-			return UsuarioMapper.toUsuarioDomain(dadosUsuario.get());
-		} else {
-			throw new UsuarioNaoEncontradoException(MensagensUtil.recuperarMensagem(MensagensUtil.ERRO_USUARIO_NAO_ENCONTRADO));
-		}
 	}
 	
 	protected UsuarioEntity getUsuarioEntity(Optional<UsuarioEntity> dadosUsuario) {

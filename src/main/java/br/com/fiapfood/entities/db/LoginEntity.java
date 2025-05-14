@@ -32,4 +32,8 @@ public class LoginEntity {
 		this.matricula = matricula;
 		this.senha = senha;
 	}
+	
+	public void atualizarSenha(String senha) {
+		this.senha = senha;
+	}
 }
