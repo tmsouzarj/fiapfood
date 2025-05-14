@@ -42,7 +42,10 @@ public class UsuarioService {
 	}
 	
 	public void cadastrar(UsuarioRecordRequest usuario) {
-		salvar(UsuarioMapper.toUsuario(usuario));
+		UsuarioDomain usuarioDomain = UsuarioMapper.toUsuario(usuario);
+		UsuarioEntity usuarioEntity = UsuarioMapper.toUsuario(usuarioDomain);
+		
+		salvar(usuarioEntity);
 	}
 	
 	public void atualizar(Integer id, UsuarioRecordRequest usuarioRecord) {
@@ -67,12 +70,6 @@ public class UsuarioService {
 		}
 		
 		salvar(usuario);
-	}
-	
-	public void salvar(UsuarioDomain usuario) {
-		UsuarioEntity usuarioEntity = UsuarioMapper.toUsuario(usuario);
-		
-		usuarioRepository.salvar(usuarioEntity);
 	}
 	
 	public void salvar(UsuarioEntity usuario) {

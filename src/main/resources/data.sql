@@ -1,18 +1,18 @@
 insert into perfil (nome) values ('Dono');
 insert into perfil (nome) values ('Cliente');
 
-insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Thiago Motta', 'thiago@restaurantetudibaum.com', 1, current_timestamp, null, 1);
-insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Usuario 2', 'usuario2@restaurantetudibaum.com', 1, current_timestamp, null, 2);
-insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Usuario 3', 'usuario3@restaurantetudibaum.com', 0, current_timestamp, current_timestamp, 1);
-insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Usuario 4', 'usuario4@restaurantetudibaum.com', 0, current_timestamp, current_timestamp, 2);
-insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Usuario 5', 'usuario5@restaurantetudibaum.com', 1, current_timestamp, null, 1);
-insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Usuario 6', 'usuario6@restaurantetudibaum.com', 1, current_timestamp, null, 1);
-insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Usuario 7', 'usuario7@restaurantetudibaum.com', 0, current_timestamp, current_timestamp, 1);
-insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Usuario 8', 'usuario8@restaurantetudibaum.com', 0, current_timestamp, current_timestamp, 2);
-insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Usuario 9', 'usuario9@restaurantetudibaum.com', 1, current_timestamp, null, 2);
-insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Usuario 10', 'usuario10@restaurantetudibaum.com', 1, current_timestamp, null, 2);
-insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Usuario 11', 'usuario11@restaurantetudibaum.com', 0, current_timestamp, current_timestamp, 2);
-insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Usuario 12', 'usuario12@restaurantetudibaum.com', 0, current_timestamp, current_timestamp, 2);
+insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Thiago Motta', 'thiago@fiapfood.com', 1, current_timestamp, null, 1);
+insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Usuario 2', 'usuario2@fiapfood.com', 1, current_timestamp, null, 2);
+insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Usuario 3', 'usuario3@fiapfood.com', 0, current_timestamp, current_timestamp, 1);
+insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Usuario 4', 'usuario4@fiapfood.com', 0, current_timestamp, current_timestamp, 2);
+insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Usuario 5', 'usuario5@fiapfood.com', 1, current_timestamp, null, 1);
+insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Usuario 6', 'usuario6@fiapfood.com', 1, current_timestamp, null, 1);
+insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Usuario 7', 'usuario7@fiapfood.com', 0, current_timestamp, current_timestamp, 1);
+insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Usuario 8', 'usuario8@fiapfood.com', 0, current_timestamp, current_timestamp, 2);
+insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Usuario 9', 'usuario9@fiapfood.com', 1, current_timestamp, null, 2);
+insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Usuario 10', 'usuario10@fiapfood.com', 1, current_timestamp, null, 2);
+insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Usuario 11', 'usuario11@fiapfood.com', 0, current_timestamp, current_timestamp, 2);
+insert into usuario (nome, email, ativo, data_criacao, data_atualizacao, id_perfil) values ('Usuario 12', 'usuario12@fiapfood.com', 0, current_timestamp, current_timestamp, 2);
 
 insert into endereco (id_usuario, cidade, bairro, estado, endereco, numero, complemento, sem_numero, cep) 
 values (1, 'São Gonçalo', 'Nova Cidade', 'Rio de Janeiro', 'Rua Aquidabã', '79', 'Casa 8', 1, '24455450');

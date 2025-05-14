@@ -33,10 +33,10 @@ public class LoginController implements LoginDoc {
 	
 	@Override
 	@PatchMapping("/{id}/senha/altera")
-	public ResponseEntity<SucessoResponse> trocarSenha(Integer id, SenhaRecordRequest dadosSenha) {
-		log.info("trocar senha():id {} - senha {}", id, dadosSenha.senha());
+	public ResponseEntity<SucessoResponse> trocarSenha(Integer id, SenhaRecordRequest dados) {
+		log.info("trocar senha():id {} - senha {}", id, dados.senha());
 
-		loginService.trocarSenha(id, dadosSenha.senha());
+		loginService.trocarSenha(id, dados.senha());
 		
 		return ResponseEntity.ok(new SucessoResponse(MensagensUtil.recuperarMensagem(MensagensUtil.SUCESSO_TROCA_SENHA_USUARIO)));
 	}
