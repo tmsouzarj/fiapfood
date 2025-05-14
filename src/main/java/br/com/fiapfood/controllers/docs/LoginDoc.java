@@ -1,16 +1,12 @@
 package br.com.fiapfood.controllers.docs;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import br.com.fiapfood.controllers.response.ErroResponse;
 import br.com.fiapfood.controllers.response.SucessoResponse;
 import br.com.fiapfood.entities.record.request.LoginRecordRequest;
-import br.com.fiapfood.entities.record.request.SenhaRecordRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -28,17 +24,4 @@ public interface LoginDoc {
 		@ApiResponse(responseCode = "400", description = "Falha ao realizar a geração do token de acesso.", content = @Content)
 	})	
 	ResponseEntity<SucessoResponse> validar(@RequestBody @Valid @NotNull LoginRecordRequest dados);
-
-	@Operation(summary = "Realiza a alteração da senha do usuário.")
-	@ApiResponses(value = {
-		@ApiResponse(responseCode = "204"),
-		@ApiResponse(responseCode = "400", 
-				     description = "Bad Request.", 
-					 content = { @Content(mediaType = "application/json", 
-					    				  schema = @Schema(implementation = ErroResponse.class), 
-					    				  examples = @ExampleObject(value = "{\r\n"
-						    				  	  + "    \"mensagem\": \"Ocorreu um erro ao realizar a troca da senha do usuário.\"\r\n"
-						    				  	  + "}"))})
-	})
-	ResponseEntity<SucessoResponse> trocarSenha(@PathVariable @Valid @NotNull Integer id, @RequestBody @NotNull SenhaRecordRequest senha);
 }
