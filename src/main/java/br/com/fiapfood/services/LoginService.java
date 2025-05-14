@@ -35,4 +35,12 @@ public class LoginService {
 
 		loginRepository.salvar(login);
 	}
+	
+	public void atualizarMatricula(Integer id, String matricula) {
+		LoginEntity login = loginRepository.buscarPorIdUsuario(id);
+		
+		login.atualizarMatricula(matricula);
+
+		loginRepository.salvar(login);
+	}
 }

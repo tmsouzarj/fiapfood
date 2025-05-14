@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "endereco")
-public class DadosEnderecoEntity {
+public class EnderecoEntity {
 	@Id
 	@Column(name = "id_usuario")
 	private Integer id;
@@ -46,5 +46,9 @@ public class DadosEnderecoEntity {
 		this.cep = cep;
 		this.complemento = complemento;
 		this.semNumero = semNumero;
+	}
+	
+	public void atualizarUsuario(UsuarioEntity usuario) {
+		this.usuario = usuario;
 	}
 }

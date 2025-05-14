@@ -27,28 +27,24 @@ public abstract class UsuarioMapper {
 							     LocalDateTime.now(),
 							     null,
 							     true,
-							     DadosEnderecoMapper.toDadosEndereco(usuario.dadosEndereco()),
+							     null, // DadosEnderecoMapper.toDadosEndereco(usuario.dadosEndereco()),
 							     PerfilAcessoMapper.toPerfil(usuario.perfil()),
-							     LoginMapper.toLogin(usuario.dadosLogin()));
+							     null //LoginMapper.toLogin(usuario.dadosLogin())
+							     );
 	}
 
 	// 2 - domain -> entity
 	
-	public static UsuarioEntity toUsuario(UsuarioDomain usuario) {
-		UsuarioEntity usuarioEntity = new UsuarioEntity(usuario.getId(),
-														usuario.getNome(), 
-														usuario.getEmail(), 
-														usuario.getDataCriacao(),
-														usuario.getDataAtualizacao(),
-														usuario.getIsAtivo(),
-														null,
-														PerfilAcessoMapper.toPerfil(usuario.getPerfil()),
-														null);
-		
-		usuarioEntity.atualizarDadosEndereco(DadosEnderecoMapper.toDadosEndereco(usuario.getDadosEndereco()));
-		usuarioEntity.atualizarDadosLogin(LoginMapper.toLogin(usuario.getDadosLogin()));
-
-		return usuarioEntity;
+	public static UsuarioEntity toUsuario(UsuarioDomain usuario) {	
+		return new UsuarioEntity(usuario.getId(),
+								 usuario.getNome(), 
+								 usuario.getEmail(), 
+								 usuario.getDataCriacao(),
+								 usuario.getDataAtualizacao(),
+								 usuario.getIsAtivo(),
+								 null,
+								 PerfilAcessoMapper.toPerfil(usuario.getPerfil()),
+								 null);
 	}
 	
 	// entity -> domain -> record

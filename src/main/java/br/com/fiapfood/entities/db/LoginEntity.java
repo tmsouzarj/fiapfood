@@ -28,12 +28,11 @@ public class LoginEntity {
 	@JoinColumn(name = "id_usuario")
 	private UsuarioEntity usuario;
 
-	public void atualizarDados(String matricula, String senha) {
-		this.matricula = matricula;
-		this.senha = senha;
-	}
-	
 	public void atualizarSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public void atualizarMatricula(String matricula) {
+		this.matricula = matricula;
 	}
 }

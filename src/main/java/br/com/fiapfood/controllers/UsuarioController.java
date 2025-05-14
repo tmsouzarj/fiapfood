@@ -7,26 +7,40 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiapfood.controllers.docs.UsuarioDoc;
 import br.com.fiapfood.controllers.response.SucessoResponse;
+import br.com.fiapfood.entities.record.request.EmailRecordRequest;
+import br.com.fiapfood.entities.record.request.EnderecoRecordRequest;
+import br.com.fiapfood.entities.record.request.LoginRecordRequest;
+import br.com.fiapfood.entities.record.request.NomeRecordRequest;
+import br.com.fiapfood.entities.record.request.PerfilRecordRequest;
 import br.com.fiapfood.entities.record.request.UsuarioRecordRequest;
 import br.com.fiapfood.entities.record.response.UsuarioRecordPaginacaoResponse;
 import br.com.fiapfood.entities.record.response.UsuarioRecordResponse;
+import br.com.fiapfood.services.EnderecoService;
+import br.com.fiapfood.services.LoginService;
 import br.com.fiapfood.services.UsuarioService;
 import br.com.fiapfood.utils.MensagensUtil;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/usuarios")
 @Slf4j
 public class UsuarioController implements UsuarioDoc {
-	
+
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private LoginService loginService;
+
+	@Autowired
+	private EnderecoService enderecoService;
 	
 	@Override
 	@PostMapping
@@ -38,16 +52,6 @@ public class UsuarioController implements UsuarioDoc {
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
-	@Override
-	@PutMapping("/{id}")
-	public ResponseEntity<Void> atualizar(Integer id, UsuarioRecordRequest usuario) {
-		log.info("atualizar():id {} - dados do usuário {}", id, usuario);
-	
-		usuarioService.atualizar(id, usuario);
-		
-		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-	}
-	
 	@Override
 	@DeleteMapping("/{id}")
 	public ResponseEntity<SucessoResponse> inativar(Integer id) {
@@ -82,5 +86,47 @@ public class UsuarioController implements UsuarioDoc {
 		log.info("buscarUsuarios() - pagina {}", pagina);
 
 		return ResponseEntity.ok().body(usuarioService.buscarUsuarios(pagina));
+	}
+
+	@Override
+	@PatchMapping("/{id}/perfil")
+	public ResponseEntity<Void> atualizarPerfil(Integer id, PerfilRecordRequest dadosPerfil) {
+		usuarioService.atualizarPerfil(id, dadosPerfil.idPerfil());
+
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); 
+	}
+
+	@Override
+	@PatchMapping("/{id}/login")
+	public ResponseEntity<Void> atualizarLogin(Integer id, LoginRecordRequest dadosLogin) {
+		log.info("atualizarLogin() - id {} dados login: {}", id, dadosLogin);
+
+		loginService.atualizarMatricula(id, dadosLogin.matricula());
+		
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); 
+	}
+
+	@Override
+	@PatchMapping("/{id}/endereco")
+	public ResponseEntity<Void> atualizarEndereco(Integer id, EnderecoRecordRequest dadosEndereco) {
+		enderecoService.atualizarEndereco(id, dadosEndereco);
+		
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); 
+	}
+
+	@Override
+	@PatchMapping("/{id}/nome")	
+	public ResponseEntity<Void> atualizarNome(@Valid @NotNull Integer id, NomeRecordRequest dados) {
+		usuarioService.atualizarNome(id, dados.nome());
+
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); 
+	}
+
+	@Override
+	@PatchMapping("/{id}/email")	
+	public ResponseEntity<Void> atualizarEmail(@Valid @NotNull Integer id, EmailRecordRequest dados) {
+		usuarioService.atualizarEmail(id, dados.email());
+
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); 
 	}
 }
